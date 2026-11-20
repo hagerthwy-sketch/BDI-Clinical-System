@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قائمة بيك للاكتئاب (BDI) | النظام الإكلينيكي الرقمي الموحد</title>
+    <!-- خطوط عربية وإنجليزية مريحة بصرياً ومناسبة للمقاييس النفسية -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="system-wrapper">
+
+        <!-- =====================================================================
+             1. صفحة الغلاف الرسمية (Cover Page)
+             ===================================================================== -->
+        <section id="coverPage" class="view-screen active-view" aria-label="صفحة الغلاف">
+            <div class="cover-card">
+                <!-- شريط الشعارات الأكاديمية المشتركة -->
+                <header class="logos-bar">
+                    <div class="logo-box">
+                        <img src="منوفية.jpg" alt="شعار جامعة المنوفية" onerror="this.style.display='none'">
+                        <span>جامعة المنوفية</span>
+                    </div>
+                    <div class="logo-box">
+                        <img src="تربية نوعية.jpeg" alt="شعار كلية التربية النوعية" onerror="this.style.display='none'">
+                        <span>كلية التربية النوعية</span>
+                    </div>
+                    <div class="logo-box">
+                        <img src="اداب.jpeg" alt="شعار كلية الآداب" onerror="this.style.display='none'">
+                        <span>كلية الآداب</span>
+                    </div>
+                </header>
+
+                <div class="academic-dedication">
+                    <span class="pill-badge">بروتوكول تعاون أكاديمي وتقني مشترك</span>
+                    <p class="dedication-from">تطوير وبرمجة: <strong>كلية التربية النوعية – قسم الحاسب الآلي لذوي الاحتياجات الخاصة</strong></p>
+                    <p class="dedication-to">مُهدى إلى / بالتعاون مع: <strong>كلية الآداب – قسم علم النفس</strong></p>
+                </div>
+
+                <div class="test-identity">
+                    <h1 id="coverTestTitle">قائمة "بيك" للاكتئاب (BDI)</h1>
+                    <p id="coverTestSubtitle" class="en-subtitle" lang="en" dir="ltr">Beck Depression Inventory – Clinical Assessment System</p>
+                    <div class="copyright-box">
+                        <p><strong>المؤلفون الأصليون:</strong> آرون بيك، و روبرت ستير (1971)</p>
+                        <p><strong>الترجمة العربية والتقنين:</strong> أ.د. أحمد عبد الخالق</p>
+                        <p class="rights-note">أداة إكلينيكية معتمدة لقياس عمق وشدة الاكتئاب وتقديم تشخيص سريع. النسخة الرقمية مُطورة للأغراض البحثية والعيادية.</p>
+                    </div>
+                </div>
+
+                <div class="cover-actions">
+                    <button type="button" id="goToLoginBtn" class="btn btn-primary btn-lg">
+                        بدء الجلسة التقييمية وتسجيل البيانات ⬅
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================================
+             2. صفحة تسجيل الدخول وبيانات الحالة/المفحوص (Examinee Info Page)
+             ===================================================================== -->
+        <section id="loginInfoPage" class="view-screen" style="display: none;" aria-label="بيانات المفحوص">
+            <div class="form-card">
+                <header class="section-header">
+                    <h2>بيانات المفحوص والتهيئة البيئية الإكلينيكية</h2>
+                    <p>يرجى التأكد من توفير بيئة هادئة وإضاءة كافية لضمان تركيز المفحوص قبل البدء.</p>
+                </header>
+
+                <form id="patientDataForm" novalidate>
+                    <div class="form-grid">
+                        <!-- اسم الحالة / الكود التعريفي -->
+                        <div class="form-group full-width">
+                            <label for="patientIdentifier">اسم المفحوص أو الكود التعريفي (لحفظ السرية الطبية): <span class="req">*</span></label>
+                            <input type="text" id="patientIdentifier" placeholder="أدخل اسم الحالة أو الكود الرقمي المعتمد..." required autocomplete="off">
+                        </div>
+
+                        <!-- اسم الفاحص / المعالج -->
+                        <div class="form-group full-width">
+                            <label for="examinerName">اسم الأخصائي / الفاحص النفسي:</label>
+                            <input type="text" id="examinerName" placeholder="أدخل اسم الأخصائي القائم بالتطبيق (اختياري)..." autocomplete="off">
+                        </div>
+
+                        <!-- العمر -->
+                        <div class="form-group">
+                            <label for="patientAge">العمر (بالسنوات): <span class="req">*</span></label>
+                            <input type="number" id="patientAge" min="15" max="100" placeholder="مثال: 28" required>
+                        </div>
+
+                        <!-- تاريخ تطبيق الاختبار (يتحدث تلقائياً بتاريخ اليوم من النظام) -->
+                        <div class="form-group">
+                            <label for="testDate">تاريخ الجلسة (تلقائي): <span class="req">*</span></label>
+                            <input type="date" id="testDate" required>
+                        </div>
+
+                        <!-- صورة المفحوص 4x6 للتقرير الطبي (اختياري) -->
+                        <div class="form-group full-width">
+                            <label for="patientPhotoInput">صورة المفحوص الشخصية 4×6 للتقرير الطبي (اختياري):</label>
+                            <input type="file" id="patientPhotoInput" accept="image/*">
+                        </div>
+                    </div>
+
+                    <!-- إرشادات التطبيق المعتمدة -->
+                    <div class="clinical-notice-box">
+                        <h4>تعليمات التطبيق الإكلينيكي:</h4>
+                        <ul>
+                            <li>يستغرق التطبيق الذاتي ما بين <strong>5 إلى 10 دقائق</strong> تقريباً.</li>
+                            <li>تتضمن القائمة 21 مجموعة من الجمل تصف مشاعرك وأحاسيسك في نواحي متعددة.</li>
+                            <li>يرجى قراءة كل مجموعة واختيار جملة واحدة تعطي أدق وصف لحالتك النفسية والشعور السائد لديك خلال <strong>السبعة أيام الماضية بما فيها هذا اليوم</strong>.</li>
+                        </ul>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="backToCoverBtn" class="btn btn-secondary">رجوع للغلاف</button>
+                        <button type="submit" id="startAssessmentBtn" class="btn btn-primary" disabled>
+                            بدء القائمة (21 بنداً) ⬅
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- =====================================================================
+             3. صفحات بنود الاختبار التفاعلية (Interactive 21 Items Pages)
+             ===================================================================== -->
+        <section id="testItemsPage" class="view-screen" style="display: none;" aria-label="بنود الاختبار">
+            <div class="test-topbar">
+                <div class="meta-strip">
+                    <span>المفحوص: <strong id="activePatientDisplay">--</strong></span>
+                    <span id="questionCounterBadge" class="counter-badge">البند 1 من 21</span>
+                    <span id="testTimer" class="timer-badge">الوقت: 00:00</span>
+                </div>
+                <div class="progress-track" role="progressbar" aria-valuemin="1" aria-valuemax="21" aria-valuenow="1">
+                    <div id="testProgressBar" class="progress-fill" style="width: 4.76%;"></div>
+                </div>
+            </div>
+
+            <div class="item-instructions-banner">
+                <p><strong>تعليمات:</strong> اقرأ مجموعة الجمل التالية واختر الجملة التي تعطي أدق وصف لحالتك النفسية والشعور السائد خلال <strong>السبعة أيام الماضية بما فيها اليوم</strong> (في حال انطباق أكثر من عبارة، يتم تسجيل التقدير الأعلى تلقائياً).</p>
+            </div>
+
+            <div class="item-stage-card">
+                <div class="item-header-meta">
+                    <span class="domain-tag" id="itemCategoryTag">البُعد الوجداني</span>
+                    <span class="item-symptom-name" id="itemSymptomTitle">1. المزاج (Mood)</span>
+                </div>
+
+                <div id="itemOptionsGrid" class="options-container" role="group" aria-labelledby="itemSymptomTitle">
+                    <!-- تُحقن الخيارات الأربعة ديناميكياً هنا عبر JS -->
+                </div>
+            </div>
+
+            <div class="test-navigation">
+                <button type="button" id="prevItemBtn" class="btn btn-secondary" disabled>➡ البند السابق</button>
+                <button type="button" id="nextItemBtn" class="btn btn-primary" disabled>البند التالي ⬅</button>
+                <button type="button" id="finishTestBtn" class="btn btn-success" style="display: none;" disabled>إنهاء الاختبار وحساب النتائج ✔</button>
+            </div>
+        </section>
+
+        <!-- =====================================================================
+             4. صفحة معالجة الدرجات وتصنيف الشدة (Scoring & Severity Calculation Page)
+             ===================================================================== -->
+        <section id="scoringPage" class="view-screen" style="display: none;" aria-label="معالجة الدرجات">
+            <div class="scoring-card">
+                <header class="section-header">
+                    <h2>المعالجة السيكومترية وتصنيف شدة الاكتئاب</h2>
+                    <p>التجميع التلقائي للدرجات الخام ومطابقتها مع المعايير الإكلينيكية لقائمة بيك</p>
+                </header>
+
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <span class="metric-title">مجموع الدرجات الخام (Raw Score)</span>
+                        <strong id="rawScoreValue" class="metric-number">0</strong>
+                        <small>الحد الأقصى للدرجة الكلية: 63 درجة</small>
+                    </div>
+
+                    <div class="metric-box highlight-box" id="severityMetricBox">
+                        <span class="metric-title">تصنيف شدة الاكتئاب</span>
+                        <strong id="severityClassification" class="metric-text">--</strong>
+                        <small id="severityRangeNote">المدى المعياري للاستجابة</small>
+                    </div>
+                </div>
+
+                <div id="clinicalAlertsContainer" class="clinical-alerts-box" style="display: none;" role="alert">
+                    <h3>⚠️ تنبيهات إكلينيكية حرجة للفاحص</h3>
+                    <ul id="scoringAlertsList"></ul>
+                </div>
+
+                <div class="scoring-actions">
+                    <button type="button" id="generateReportBtn" class="btn btn-primary btn-lg">
+                        إصدار التقرير الطبي الرسمي (صفحة A4 واحدة) 📄
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================================
+             5. صفحة التقرير الطبي الرسمي المضغوط (Single-Page A4 Medical Report)
+             ===================================================================== -->
+        <section id="reportPage" class="view-screen" style="display: none;" aria-label="التقرير التشخيصي">
+            <!-- شريط أدوات التحكم (يُخفى تلقائياً عند الطباعة عبر @media print) -->
+            <div class="report-toolbar no-print">
+                <button type="button" id="backToScoringBtn" class="btn btn-secondary">➡ رجوع لصفحة النتائج</button>
+                <div class="toolbar-right">
+                    <button type="button" onclick="window.print()" class="btn btn-primary">🖨️ طباعة التقرير الطبي (A4)</button>
+                    <button type="button" id="newSessionBtn" class="btn btn-outline">🔄 بدء جلسة جديدة</button>
+                </div>
+            </div>
+
+            <!-- ورقة التقرير الطبي الرسمي بحدود مزدوجة ومقاس A4 مضغوط -->
+            <article id="printableReportSheet" class="medical-certificate-sheet">
+                <div class="certificate-inner-border">
+
+                    <!-- ترويسة التقرير الطبي + مربع الصورة 4x6 -->
+                    <header class="med-cert-header">
+                        <div class="med-org-info">
+                            <h3>جامعة المنوفية</h3>
+                            <p>كلية التربية النوعية – قسم الحاسب الآلي لذوي الاحتياجات الخاصة</p>
+                            <p>بالتعاون مع: كلية الآداب – قسم علم النفس</p>
+                            <span class="med-ref-no">رقم الجلسة: <strong id="repSessionId">BDI-2026</strong></span>
+                        </div>
+
+                        <div class="med-center-logo">
+                            <img src="منوفية.jpg" alt="شعار جامعة المنوفية" onerror="this.style.display='none'">
+                        </div>
+
+                        <!-- إطار صورة المفحوص 4x6 مثل التقرير الطبي الرسمي -->
+                        <div class="patient-photo-frame" id="patientPhotoFrame">
+                            <img id="repPatientPhotoImg" src="" alt="صورة المفحوص" style="display: none;">
+                            <div id="photoPlaceholderText" class="photo-placeholder">
+                                <span>صورة المفحوص</span>
+                                <small>٤ × ٦</small>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- عنوان التقرير -->
+                    <div class="med-cert-title">
+                        <h2>تقرير طبي إكلينيكي لتحديد شدة الحالة النفسية (مقياس بيك للاكتئاب - BDI)</h2>
+                        <p dir="ltr">Clinical Psychological Assessment Report – Beck Depression Inventory</p>
+                    </div>
+
+                    <!-- بيانات المفحوص بنمط النقاط الطبية -->
+                    <div class="med-patient-lines">
+                        <div class="med-line">
+                            <span><strong>اسم المفحوص / الكود:</strong> <span id="repPatientName" class="dotted-val">--</span></span>
+                            <span><strong>العمر:</strong> <span id="repPatientAge" class="dotted-val">--</span></span>
+                            <span><strong>تاريخ التطبيق:</strong> <span id="repTestDate" class="dotted-val">--</span></span>
+                        </div>
+                        <div class="med-line">
+                            <span><strong>الأخصائي القائم بالفحص:</strong> <span id="repExaminerName" class="dotted-val">--</span></span>
+                            <span><strong>مدة التطبيق:</strong> <span id="repDuration" class="dotted-val">--</span></span>
+                            <span><strong>الجهة الموجهة:</strong> <span class="dotted-val">عيادة / قسم علم النفس</span></span>
+                        </div>
+                    </div>
+
+                    <!-- جدول ملخص النتائج والأبعاد السيكومترية -->
+                    <div class="med-section">
+                        <h4 class="med-section-heading">أولاً: ملخص النتائج السيكومترية وتوزيع الأبعاد (Psychometric Summary)</h4>
+                        <table class="med-summary-table">
+                            <thead>
+                                <tr>
+                                    <th>الدرجة الكلية الخام</th>
+                                    <th>التصنيف التشخيصي (عربي / English)</th>
+                                    <th>البُعد المعرفي</th>
+                                    <th>البُعد الوجداني</th>
+                                    <th>البُعد البدني والجسمي</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong id="repRawScore" class="score-highlight">--</strong> / 63</td>
+                                    <td><strong id="repSeverityClass">--</strong></td>
+                                    <td id="repCogScore">--</td>
+                                    <td id="repAffScore">--</td>
+                                    <td id="repSomScore">--</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- نتائج الفحص الإكلينيكي (الأعراض البارزة ونقاط القوة) -->
+                    <div class="med-section">
+                        <h4 class="med-section-heading">ثانياً: نتائج الفحص النفسي والنمط الإكلينيكي للحالة</h4>
+                        <div class="med-findings-grid">
+                            <div class="finding-col">
+                                <p class="sub-label">بفحص الحالة تبين وجود المؤشرات والأعراض البارزة التالية:</p>
+                                <ul id="arSupportAreasList" class="compact-list"></ul>
+                            </div>
+                            <div class="finding-col">
+                                <p class="sub-label">نقاط القوة ومجالات الاستقرار النفسي للمفحوص:</p>
+                                <ul id="arStrengthsList" class="compact-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- الرأي الإكلينيكي ثنائي اللغة (عربي / إنجليزي) -->
+                    <div class="med-section">
+                        <h4 class="med-section-heading">ثالثاً: ملخص الرأي الإكلينيكي وتنبيهات الأمان (Clinical Opinion & Safety)</h4>
+                        <div class="bilingual-compact-box">
+                            <div class="bi-ar" lang="ar" dir="rtl">
+                                <p id="arClinicalInterpretation">--</p>
+                                <div id="arSafetyBox" class="compact-safety">
+                                    <strong>تنبيهات الأمان الحرجة:</strong>
+                                    <span id="arSafetyText">لا توجد مؤشرات خطورة انتحارية مسجلة (البند 2 و 9).</span>
+                                </div>
+                            </div>
+                            <div class="bi-en" lang="en" dir="ltr">
+                                <p id="enClinicalInterpretation">--</p>
+                                <div id="enSafetyBox" class="compact-safety">
+                                    <strong>Critical Safety Flags:</strong>
+                                    <span id="enSafetyText">No critical suicidal risk flags recorded (Items 2 & 9).</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- جدول اعتماد اللجنة / المشرفين -->
+                    <div class="med-section">
+                        <table class="med-committee-table">
+                            <thead>
+                                <tr>
+                                    <th>م</th>
+                                    <th>الصفة الإكلينيكية / الأكاديمية</th>
+                                    <th>الجهة</th>
+                                    <th>الاسم</th>
+                                    <th>التوقيع</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>الأخصائي الفاحص المطبق للمقياس</td>
+                                    <td>قسم علم النفس</td>
+                                    <td id="tableExaminerName">--</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>المشرف الأكاديمي / الإكلينيكي</td>
+                                    <td>كلية الآداب / التربية النوعية</td>
+                                    <td>........................................</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- تذييل التقرير -->
+                    <footer class="med-cert-footer">
+                        <span>يُعتمد هذا التقرير للأغراض التشخيصية والبحثية بسرية تامة.</span>
+                        <span>تاريخ الإصدار: <strong id="repPrintStamp">--</strong></span>
+                    </footer>
+
+                </div>
+            </article>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
